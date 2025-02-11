@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Player({ name, symbol }) {
   const [isEditing, setIsEditing] = useState(false);
   function handleEditClick() {
-    setIsEditing((isEditing) => !isEditing);
+    setIsEditing((isEditing) => !isEditing); //updating state based on old state correctly : recommended by React
   }
   let playerName = <span className="player-name">{name}</span>;
   if (isEditing) {
