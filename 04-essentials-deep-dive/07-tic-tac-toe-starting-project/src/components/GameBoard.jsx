@@ -11,6 +11,7 @@ export default function GameBoard() {
 
   function handleSelectSquare(rowIndex, colIndex, playerSymbol) {
     setGameBoard((prevGameBoard) => {
+      // creating copy of the boardGame array and then reassigning it
       let updatedBoardGame = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
