@@ -3,24 +3,31 @@ import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
 import Player from "./components/Player.jsx";
 
-function App() {
-  const Player1_Symbol = "X";
-  const Player2_Symbol = "O";
+const Player1_Symbol = "X";
+const Player2_Symbol = "O";
 
-  const [activePlayer, setActivePlayer] = useState(Player1_Symbol);
+function derivedActivePlayer(gameTurns) {
+  let currentPlayer = Player1_Symbol;
+  if (gameTurns.length > 0 && gameTurns[0].player === Player1_Symbol) {
+    currentPlayer = Player2_Symbol;
+  }
+  return currentPlayer;
+}
+
+function App() {
+  //const [activePlayer, setActivePlayer] = useState(Player1_Symbol);
   const [gameTurns, setGameTurns] = useState([]);
+  const activePlayer = derivedActivePlayer(gameTurns);
+
   function handleSelectSquare(rowIndex, colIndex) {
-    setActivePlayer((currActivePlayer) =>
-      currActivePlayer === Player1_Symbol ? Player2_Symbol : Player1_Symbol
-    );
+    // setActivePlayer((currActivePlayer) =>
+    //   currActivePlayer === Player1_Symbol ? Player2_Symbol : Player1_Symbol
+    // );
 
     setGameTurns((prevGameTurns) => {
-      let currentPlayer = Player1_Symbol;
-      if (gameTurns.length > 0 && gameTurns[0].player === Player1_Symbol) {
-        currentPlayer = Player2_Symbol;
-      }
+      const activePlayer = derivedActivePlayer(gameTurns);
       const updatedGameTurns = [
-        { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
+        { square: { row: rowIndex, col: colIndex }, player: activePlayer },
         ...prevGameTurns,
       ];
 
