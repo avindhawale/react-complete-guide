@@ -21,18 +21,28 @@ export default function AuthInputs() {
   const emailNotValid = submitted && !enteredEmail.includes("@");
   const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
-  const controlContainer = styled.div`
+  const ControlContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
   `;
 
+  const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b7280;
+  `;
+
   return (
     <div id="auth-inputs">
-      <controlContainer>
+      <ControlContainer>
         <p>
-          <label>Email</label>
+          <Label>Email</Label>
           <input
             type="email"
             className={emailNotValid ? "invalid" : undefined}
@@ -40,7 +50,7 @@ export default function AuthInputs() {
           />
         </p>
         <p>
-          <label>Password</label>
+          <Label>Password</Label>
           <input
             type="password"
             className={passwordNotValid ? "invalid" : undefined}
@@ -49,7 +59,7 @@ export default function AuthInputs() {
             }
           />
         </p>
-      </controlContainer>
+      </ControlContainer>
       <div className="actions">
         <button type="button" className="text-button">
           Create a new account
