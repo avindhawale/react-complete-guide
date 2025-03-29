@@ -16,4 +16,4 @@ This repo is meant for me to:
 - React
 - JavaScript (ES6+)
 - HTML & CSS
-- (Optional: Add any libraries or tools like React Router, Redux, etc., as you move forward and this is test)
+- (Optional: Add any libraries or tools like React Router, Redux, etc., as you move forward)
