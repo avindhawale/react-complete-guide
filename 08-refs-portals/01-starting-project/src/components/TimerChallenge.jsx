@@ -9,7 +9,7 @@ export default function TimerChallenge({title, targetTimer, }){
 
     function handleStart(){
         setTimerStarted(true);
-        timer = setTimeout(()=>{
+        timer.current = setTimeout(()=>{
             setTimerExpired(true);
         }, targetTimer * 1000);
     }
@@ -19,7 +19,7 @@ export default function TimerChallenge({title, targetTimer, }){
     }
 
     return <section className="challenge">
-        {timerExpired && <ResultModal targetTime={targetTime} result="lost" />}
+        {timerExpired && <ResultModal targetTime={targetTimer} result="lost" />}
         <h2>{title}</h2>
         <p className="challenge-time">
             {targetTimer} second{targetTimer > 1 ? 's' : ''}
