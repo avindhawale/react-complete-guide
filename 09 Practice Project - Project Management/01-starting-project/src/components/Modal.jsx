@@ -1,4 +1,5 @@
 import { useImperativeHandle, useRef } from "react"
+import Button from "./Button";
 
 export default function Modal({ children, buttonCaption, ref }) {
 
@@ -10,10 +11,10 @@ export default function Modal({ children, buttonCaption, ref }) {
             }
         }
     })
-    return <dialog ref={modal}>
+    return <dialog ref={modal} className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md">
         {children}
-        <form action="dailog">
-            <button>{buttonCaption}</button>
+        <form action="dailog" className="mt-4 text-right">
+            <Button>{buttonCaption}</Button>
         </form>
     </dialog>
 }
