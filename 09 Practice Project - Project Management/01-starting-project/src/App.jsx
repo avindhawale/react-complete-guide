@@ -44,9 +44,17 @@ function App() {
     });
   }
 
-  function handleOnProjectSelect(id) {
-    console.log('id : ', id);
+  function handleDeleteProject() {
+    setProjectState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(project => project.id !== prevState.selectedProjectId)
+      }
+    });
+  }
 
+  function handleOnProjectSelect(id) {
     setProjectState(prevState => {
       return {
         ...prevState,
@@ -56,7 +64,7 @@ function App() {
   }
 
   const selectedProjectDetails = projectState.projects.find(project => project.id === projectState.selectedProjectId);
-  let content = <SelectedProject project={selectedProjectDetails} />;
+  let content = <SelectedProject project={selectedProjectDetails} onDelete={handleDeleteProject} />;
   if (projectState.selectedProjectId === null) {
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />;
   } else if (projectState.selectedProjectId === undefined) {
