@@ -29,6 +29,7 @@ export default function Quiz() {
         <div id="quiz">
             <div id="questions">
                 <QuestionTimer
+                    key={activeQuestionIndex}
                     timeout={10000}
                     onTimeout={() => handelSelectAnswer(null)} />
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
