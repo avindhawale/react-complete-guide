@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import quizCompletedImg from "../assets/quiz-complete.png";
 import QUESTIONS from "../questions.js";
 import Question from "./Question.jsx";
+import Summary from "./Summary.jsx";
 
 export default function Quiz() {
 
@@ -19,10 +19,7 @@ export default function Quiz() {
     const isQuizCompleted = QUESTIONS.length === activeQuestionIndex;
     if (isQuizCompleted) {
         return (
-            <div id="summary">
-                <img src={quizCompletedImg} alt="Quiz completed" />
-                <h2>Quiz Completed!</h2>
-            </div>
+            <Summary userAnswers={userAnswers} />
         )
     }
 
