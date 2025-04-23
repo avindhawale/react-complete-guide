@@ -10,6 +10,8 @@ export default function Quiz() {
 
     const handelSelectAnswer = useCallback(function handelSelectAnswer(selectedAnswer) {
         setUserAnswers(prevAnswers => [...prevAnswers, selectedAnswer]);
+        console.log('userAnswers : ', userAnswers);
+
     }, []);
 
     const handelSkipSelectAnswer = useCallback(() => handelSelectAnswer(null), [handelSelectAnswer]);
