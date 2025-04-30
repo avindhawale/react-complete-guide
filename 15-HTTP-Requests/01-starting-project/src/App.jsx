@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 import Places from './components/Places.jsx';
 import Modal from './components/Modal.jsx';
@@ -8,10 +8,18 @@ import AvailablePlaces from './components/AvailablePlaces.jsx';
 
 function App() {
   const selectedPlace = useRef();
-
   const [userPlaces, setUserPlaces] = useState([]);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/places")
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setUserPlaces(data.places);
+      })
+  }, []);
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
