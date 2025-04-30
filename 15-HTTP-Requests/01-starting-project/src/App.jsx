@@ -11,16 +11,6 @@ function App() {
   const [userPlaces, setUserPlaces] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/places")
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setUserPlaces(data.places);
-      })
-  }, []);
-
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
     selectedPlace.current = place;
