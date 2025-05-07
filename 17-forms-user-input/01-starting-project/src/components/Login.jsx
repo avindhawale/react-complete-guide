@@ -9,7 +9,7 @@ export default function Login() {
     event.preventDefault();
     console.log(email.current.value , ' : ', password.current.value);
 
-    email.current.value = ''; // resetting value
+    email.current.value = ''; // resetting value (not recommended) 
   }
 
   return (

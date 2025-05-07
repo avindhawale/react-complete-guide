@@ -8,6 +8,7 @@ export default function Signup() {
         data.acquisition = acquisition;
         console.log(data);
         
+        //event.target.reset(); // imperative way
     }
 
     return (
@@ -97,7 +98,8 @@ export default function Signup() {
         </div>
   
         <p className="form-actions">
-          <button type="reset" className="button button-flat">
+            {/* type="reset" is recommended to reset the form*/}
+          <button type="reset" className="button button-flat"> 
             Reset
           </button>
           <button type="submit" className="button">
