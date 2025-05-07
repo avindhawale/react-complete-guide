@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+
+    const [passwordMatch, setPasswordMatch] = useState(true);
 
     function handleSubmit(event){
         event.preventDefault();
@@ -6,9 +10,14 @@ export default function Signup() {
         const acquisition = fd.getAll('acquisition');
         const data = Object.fromEntries(fd.entries());
         data.acquisition = acquisition;
-        console.log(data);
         
         //event.target.reset(); // imperative way
+        if(data.password !== data['confirm-password']){
+            setPasswordMatch(false);
+            return;
+        }
+        
+        console.log(data);
     }
 
     return (
@@ -35,6 +44,7 @@ export default function Signup() {
               name="confirm-password"
               required
             />
+            <div className="control-error">{!passwordMatch && <p>Passwords do not match.</p>}</div>
           </div>
         </div>
   
