@@ -1,3 +1,4 @@
+import { useActionState } from "react";
 import {
   isEmail,
   isNotEmpty,
@@ -7,7 +8,7 @@ import {
 
 export default function Signup() {
   //Form action is React 19+ feature which gives you HTML form data automatically to get the form fields value
-  function submitAction(formData) {
+  function signupAction(prevFormState, formData) {
     const email = formData.get("email");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirm-password");
@@ -19,39 +20,49 @@ export default function Signup() {
 
     //console.log("email : ", email);
 
-    let error = [];
+    let errors = [];
 
     if (!isEmail(email)) {
-      error.push("Please enter valid email id.");
+      errors.push("Please enter valid email id.");
     }
 
     if (!isNotEmpty(password) || !hasMinLength(password, 6)) {
-      error.push("You must provide a password with at least six characters.");
+      errors.push("You must provide a password with at least six characters.");
     }
 
     if (!isEqualToOtherValue(password, confirmPassword)) {
-      error.push("Passwords do not match.");
+      errors.push("Passwords do not match.");
     }
 
     if (!isNotEmpty(firstName) || !isNotEmpty(lastName)) {
-      error.push("Please provide both first and last name.");
+      errors.push("Please provide both first and last name.");
     }
 
     if (!isNotEmpty(role)) {
-      error.push("Please select a role.");
+      errors.push("Please select a role.");
     }
 
     if (!terms) {
-      error.push("You must agree to the terms and conditions.");
+      errors.push("You must agree to the terms and conditions.");
     }
 
     if (acquisitionChannel.length === 0) {
-      error.push("Please select at least one acquisition.");
+      errors.push("Please select at least one acquisition.");
     }
+
+    if (errors.length > 0) {
+      return { errors };
+    }
+
+    return { errors: null };
   }
 
+  const [formState, formAction] = useActionState(signupAction, {
+    errors: null,
+  });
+
   return (
-    <form action={submitAction}>
+    <form action={formAction}>
       <h2>Welcome on board!</h2>
       <p>We just need a little bit of data from you to get you started 🚀</p>
 
@@ -136,6 +147,13 @@ export default function Signup() {
         </label>
       </div>
 
+      {formState.errors && (
+        <ul className="error">
+          {formState.errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       <p className="form-actions">
         <button type="reset" className="button button-flat">
           Reset
