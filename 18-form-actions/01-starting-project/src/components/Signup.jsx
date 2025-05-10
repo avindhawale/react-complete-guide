@@ -1,8 +1,53 @@
+import {
+  isEmail,
+  isNotEmpty,
+  hasMinLength,
+  isEqualToOtherValue,
+} from "../util/validation.js";
+
 export default function Signup() {
   //Form action is React 19+ feature which gives you HTML form data automatically to get the form fields value
   function submitAction(formData) {
     const email = formData.get("email");
-    console.log("email : ", email);
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirm-password");
+    const firstName = formData.get("first-name");
+    const lastName = formData.get("last-name");
+    const role = formData.get("role");
+    const terms = formData.get("terms");
+    const acquisitionChannel = formData.getAll("acquisition");
+
+    //console.log("email : ", email);
+
+    let error = [];
+
+    if (!isEmail(email)) {
+      error.push("Please enter valid email id.");
+    }
+
+    if (!isNotEmpty(password) || !hasMinLength(password, 6)) {
+      error.push("You must provide a password with at least six characters.");
+    }
+
+    if (!isEqualToOtherValue(password, confirmPassword)) {
+      error.push("Passwords do not match.");
+    }
+
+    if (!isNotEmpty(firstName) || !isNotEmpty(lastName)) {
+      error.push("Please provide both first and last name.");
+    }
+
+    if (!isNotEmpty(role)) {
+      error.push("Please select a role.");
+    }
+
+    if (!terms) {
+      error.push("You must agree to the terms and conditions.");
+    }
+
+    if (acquisitionChannel.length === 0) {
+      error.push("Please select at least one acquisition.");
+    }
   }
 
   return (
