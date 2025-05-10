@@ -1,6 +1,12 @@
 export default function Signup() {
+  //Form action is React 19+ feature which gives you HTML form data automatically to get the form fields value
+  function submitAction(formData) {
+    const email = formData.get("email");
+    console.log("email : ", email);
+  }
+
   return (
-    <form>
+    <form action={submitAction}>
       <h2>Welcome on board!</h2>
       <p>We just need a little bit of data from you to get you started 🚀</p>
 
