@@ -2,14 +2,14 @@
   "opinions": [
     {
       "id": 1747041895302,
-      "votes": 0,
+      "votes": -3,
       "userName": "Avin Dhawale",
       "title": "Test Opinion 2",
       "body": "I am testing form status on submit. "
     },
     {
       "id": 1747041331168,
-      "votes": 0,
+      "votes": 3,
       "userName": "Avin Dhawale",
       "title": "My Test Opinion",
       "body": "This is my async test opinion one."
